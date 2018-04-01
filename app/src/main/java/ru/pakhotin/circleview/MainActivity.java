@@ -3,7 +3,6 @@ package ru.pakhotin.circleview;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -29,11 +28,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             color_g = res.getColor(R.color.gas_color);
         }
         ConstraintLayout main = (ConstraintLayout) findViewById(R.id.mainLayout);
-        Button button_w = (Button) main.findViewById(R.id.water);
+        Button button_w = main.findViewById(R.id.water);
         button_w.setTag(R.string.tag_color, color_w);
         button_w.setTag(R.string.tag_state,false);
         button_w.setOnClickListener(this);
-        Button button_g = (Button) main.findViewById(R.id.gas);
+        Button button_g = main.findViewById(R.id.gas);
         button_g.setTag(R.string.tag_color,color_g);
         button_g.setTag(R.string.tag_state,false);
         button_g.setOnClickListener(this);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     final View cView = new CircleView(MainActivity.this, (int) cButton.getTag(R.string.tag_color));
-                    cView.setId(100);
+                    cView.setId(R.id.circleViewId);
 
                     ConstraintLayout.LayoutParams cPa = new ConstraintLayout.LayoutParams(0, 0);
                     cView.setLayoutParams(cPa);
@@ -93,11 +92,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     main.addView(cView, 0);
                     ConstraintSet constraintSet = new ConstraintSet();
                     constraintSet.clone(main);
-                    constraintSet.connect(100, ConstraintSet.START, main.getId(), ConstraintSet.START, 0);
-                    constraintSet.connect(100, ConstraintSet.END, main.getId(), ConstraintSet.END, 0);
-                    constraintSet.connect(100, ConstraintSet.TOP, main.getId(), ConstraintSet.TOP, 0);
-                    constraintSet.connect(100, ConstraintSet.BOTTOM, main.getId(), ConstraintSet.BOTTOM, 0);
-                    constraintSet.setDimensionRatio(100, "1:1");
+                    constraintSet.connect(R.id.circleViewId, ConstraintSet.START, main.getId(), ConstraintSet.START, 0);
+                    constraintSet.connect(R.id.circleViewId, ConstraintSet.END, main.getId(), ConstraintSet.END, 0);
+                    constraintSet.connect(R.id.circleViewId, ConstraintSet.TOP, main.getId(), ConstraintSet.TOP, 0);
+                    constraintSet.connect(R.id.circleViewId, ConstraintSet.BOTTOM, main.getId(), ConstraintSet.BOTTOM, 0);
+                    constraintSet.setDimensionRatio(R.id.circleViewId, "1:1");
 
                     constraintSet.applyTo(main);
                     cView.animate().alpha(1).setDuration(500).start();
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             });
 
         } else {
-            View cView = main.findViewById(100);
+            View cView = main.findViewById(R.id.circleViewId);
             cView.clearAnimation();
             cView.setPivotX(cView.getWidth() / 2);
             cView.setPivotY(cView.getHeight() / 2);
