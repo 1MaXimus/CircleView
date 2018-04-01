@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CircleView</string>
+    <string name="str_water">Вода</string>
+    <string name="str_gas">Газ</string>
+    <string name="tag_color">color</string>
+    <string name="tag_state">state</string>
+    <string name="tag_button">button</string>
+</resources>
